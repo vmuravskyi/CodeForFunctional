@@ -59,7 +59,7 @@ public class Car {
 
   private static final RedCarCriterion RED_CAR_CRITERION = new RedCarCriterion();
 
-  static class RedCarCriterion implements CarCriterion {
+  private static class RedCarCriterion implements CarCriterion {
 
     @Override
     public boolean test(Car c) {
@@ -67,7 +67,11 @@ public class Car {
     }
   }
 
-  static class GasLevelCarCriterion implements CarCriterion {
+  public static CarCriterion getGasLevelCarCriterion(int threshold) {
+    return new GasLevelCarCriterion(threshold);
+  }
+
+  private static class GasLevelCarCriterion implements CarCriterion {
 
     private int threshold;
 
