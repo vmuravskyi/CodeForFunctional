@@ -37,7 +37,7 @@ public class CarScratch {
     );
     showAll(cars);
     
-    showAll(getCarsByCriterion(cars, new Car.RedCarCriterion()));
+    showAll(getCarsByCriterion(cars, Car.RED_CAR_CRITERION));
     
     showAll(getCarsByCriterion(cars, new Car.GasLevelCarCriterion(7)));
     
