@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Car {
+
   private final int gasLevel;
   private final String color;
   private final List<String> passengers;
@@ -22,13 +23,13 @@ public class Car {
     Car self = new Car(gas, color, p, null);
     return self;
   }
-  
+
   public static Car withGasColorPassengersAndTrunk(int gas, String color, String... passengers) {
     List<String> p = Collections.unmodifiableList(Arrays.asList(passengers));
     Car self = new Car(gas, color, p, Arrays.asList("jack", "wrench", "spare wheel"));
     return self;
   }
-  
+
   public int getGasLevel() {
     return gasLevel;
   }
@@ -47,7 +48,29 @@ public class Car {
 
   @Override
   public String toString() {
-    return "Car{" + "gasLevel=" + gasLevel + ", color=" + color + ", passengers=" + passengers 
+    return "Car{" + "gasLevel=" + gasLevel + ", color=" + color + ", passengers=" + passengers
         + (trunkContents != null ? ", trunkContents=" + trunkContents : " no trunk") + '}';
+  }
+
+  class RedCarCriterion implements CarCriterion {
+
+    @Override
+    public boolean test(Car c) {
+      return c.getColor().equals("Red");
+    }
+  }
+
+  class GasLevelCarCriterion implements CarCriterion {
+
+    private int threshold;
+
+    public GasLevelCarCriterion(int threshold) {
+      this.threshold = threshold;
+    }
+
+    @Override
+    public boolean test(Car c) {
+      return c.getGasLevel() >= threshold;
+    }
   }
 }
