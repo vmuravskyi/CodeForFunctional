@@ -52,7 +52,7 @@ public class Car {
         + (trunkContents != null ? ", trunkContents=" + trunkContents : " no trunk") + '}';
   }
 
-  class RedCarCriterion implements CarCriterion {
+  static class RedCarCriterion implements CarCriterion {
 
     @Override
     public boolean test(Car c) {
@@ -60,7 +60,7 @@ public class Car {
     }
   }
 
-  class GasLevelCarCriterion implements CarCriterion {
+  static class GasLevelCarCriterion implements CarCriterion {
 
     private int threshold;
 
