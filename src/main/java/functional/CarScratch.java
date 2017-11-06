@@ -12,10 +12,10 @@ public class CarScratch {
     System.out.println("-------------------------------------");
   }
   
-  public static List<Car> getRedCars(List<Car> lc) {
+  public static List<Car> getCarsByColor(List<Car> lc, String color) {
     List<Car> rv = new ArrayList<>();
     for (Car c : lc) {
-      if (c.getColor().equals("Red")) {
+      if (c.getColor().equals(color)) {
         rv.add(c);
       }
     }
@@ -32,6 +32,6 @@ public class CarScratch {
     );
     showAll(cars);
     
-    showAll(getRedCars(cars));
+    showAll(getCarsByColor(cars, "Red"));
   }
 }
