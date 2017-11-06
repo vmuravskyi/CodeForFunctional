@@ -41,5 +41,7 @@ public class CarScratch {
     
     showAll(getCarsByCriterion(cars, Car.getGasLevelCarCriterion(7)));
     
+    cars.sort(Car.getFuelComparator());
+    showAll(cars);
   }
 }

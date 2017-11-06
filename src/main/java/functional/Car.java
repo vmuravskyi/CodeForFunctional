@@ -2,6 +2,7 @@ package functional;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Car {
@@ -74,6 +75,19 @@ public class Car {
     @Override
     public boolean test(Car c) {
       return c.gasLevel >= threshold;
+    }
+  }
+  
+  public static Comparator<Car> getFuelComparator() {
+    return fuelComparator;
+  }
+  
+  private static final Comparator<Car> fuelComparator = new FuelLevelComparator();
+  private static class FuelLevelComparator implements Comparator<Car> {
+
+    @Override
+    public int compare(Car o1, Car o2) {
+      return o1.gasLevel - o2.gasLevel;
     }
   }
 }
