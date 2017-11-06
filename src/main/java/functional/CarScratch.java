@@ -15,6 +15,19 @@ class RedCarCriterion implements CarCriterion {
   }
 }
 
+class GasLevelCarCriterion implements CarCriterion {
+  private int threshold;
+  
+  public GasLevelCarCriterion(int threshold) {
+    this.threshold = threshold;
+  }
+  
+  @Override
+  public boolean test(Car c) {
+    return c.getGasLevel() >= threshold;
+  }
+}
+
 public class CarScratch {
   public static void showAll(List<Car> lc) {
     for (Car c : lc) {
@@ -45,6 +58,8 @@ public class CarScratch {
     showAll(cars);
     
     showAll(getCarsByCriterion(cars, new RedCarCriterion()));
+    
+    showAll(getCarsByCriterion(cars, new GasLevelCarCriterion(7)));
     
   }
 }
