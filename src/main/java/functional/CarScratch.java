@@ -22,6 +22,16 @@ public class CarScratch {
     return rv;
   }
   
+  public static List<Car> getCarsByMinGasLevel(Iterable<Car> lc, int minGas) {
+    List<Car> rv = new ArrayList<>();
+    for (Car c : lc) {
+      if (c.getGasLevel() >= minGas) {
+        rv.add(c);
+      }
+    }
+    return rv;
+  }
+  
   public static void main(String[] args) {
     List<Car> cars = Arrays.asList(
         Car.withGasColorPassengers(6, "Red", "Fred", "Jim", "Sheila"),
