@@ -56,7 +56,7 @@ public class Car {
 
     @Override
     public boolean test(Car c) {
-      return c.getColor().equals("Red");
+      return c.color.equals("Red");
     }
   }
 
@@ -70,7 +70,7 @@ public class Car {
 
     @Override
     public boolean test(Car c) {
-      return c.getGasLevel() >= threshold;
+      return c.gasLevel >= threshold;
     }
   }
 }
