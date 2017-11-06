@@ -6,6 +6,7 @@ import java.util.List;
 
 interface CarCriterion {
   boolean test(Car c);
+  void doStuff();
 }
 
 public class CarScratch {
