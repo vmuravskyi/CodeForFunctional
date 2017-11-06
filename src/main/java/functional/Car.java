@@ -53,7 +53,8 @@ public class Car {
   }
 
   public static RedCarCriterion getRedCarCriterion() {
-    return RED_CAR_CRITERION;
+//    return RED_CAR_CRITERION;
+    return new RedCarCriterion(); // no change in caller
   }
 
   private static final RedCarCriterion RED_CAR_CRITERION = new RedCarCriterion();
