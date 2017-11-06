@@ -57,8 +57,10 @@ public class Car {
     return RED_CAR_CRITERION;
   }
 
-  private static final CarCriterion RED_CAR_CRITERION = 
-      (c) -> {return c.color.equals("Red");};
+  private static final CarCriterion RED_CAR_CRITERION
+      = (c) -> {
+        return c.color.equals("Red");
+      };
 
   public static CarCriterion getGasLevelCarCriterion(int threshold) {
     return new GasLevelCarCriterion(threshold);
@@ -77,17 +79,12 @@ public class Car {
       return c.gasLevel >= threshold;
     }
   }
-  
+
   public static Comparator<Car> getFuelComparator() {
     return fuelComparator;
   }
-  
-  private static final Comparator<Car> fuelComparator = new FuelLevelComparator();
-  private static class FuelLevelComparator implements Comparator<Car> {
 
-    @Override
-    public int compare(Car o1, Car o2) {
-      return o1.gasLevel - o2.gasLevel;
-    }
-  }
+  private static final Comparator<Car> fuelComparator = (/*Car*/ o1, /*Car*/ o2) -> {
+    return o1.gasLevel - o2.gasLevel;
+  };
 }
