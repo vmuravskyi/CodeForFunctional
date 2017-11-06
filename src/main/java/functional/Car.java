@@ -52,7 +52,7 @@ public class Car {
         + (trunkContents != null ? ", trunkContents=" + trunkContents : " no trunk") + '}';
   }
 
-  public static RedCarCriterion getRedCarCriterion() {
+  public static CarCriterion getRedCarCriterion() {
 //    return RED_CAR_CRITERION;
     return new RedCarCriterion(); // no change in caller
   }
