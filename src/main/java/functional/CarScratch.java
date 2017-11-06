@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@FunctionalInterface
 interface CarCriterion {
   boolean test(Car c);
-  void doStuff();
+//  void doStuff();
 }
 
 public class CarScratch {
