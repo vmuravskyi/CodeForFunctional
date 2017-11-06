@@ -52,6 +52,8 @@ public class Car {
         + (trunkContents != null ? ", trunkContents=" + trunkContents : " no trunk") + '}';
   }
 
+  public static final RedCarCriterion RED_CAR_CRITERION = new RedCarCriterion();
+
   static class RedCarCriterion implements CarCriterion {
 
     @Override
