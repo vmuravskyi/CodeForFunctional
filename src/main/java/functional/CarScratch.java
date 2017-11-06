@@ -1,5 +1,6 @@
 package functional;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,6 +12,16 @@ public class CarScratch {
     System.out.println("-------------------------------------");
   }
   
+  public static List<Car> getRedCars(List<Car> lc) {
+    List<Car> rv = new ArrayList<>();
+    for (Car c : lc) {
+      if (c.getColor().equals("Red")) {
+        rv.add(c);
+      }
+    }
+    return rv;
+  }
+  
   public static void main(String[] args) {
     List<Car> cars = Arrays.asList(
         Car.withGasColorPassengers(6, "Red", "Fred", "Jim", "Sheila"),
@@ -20,5 +31,7 @@ public class CarScratch {
         Car.withGasColorPassengers(6, "Red", "Ender", "Hyrum", "Locke", "Bonzo")
     );
     showAll(cars);
+    
+    showAll(getRedCars(cars));
   }
 }
