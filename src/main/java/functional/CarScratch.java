@@ -5,8 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 
 @FunctionalInterface
-interface CarCriterion {
-  boolean test(Car c);
+//interface CarCriterion {
+//  boolean test(Car c);
+//}
+interface Criterion<E> {
+  boolean test(E c);
 }
 
 public class CarScratch {
@@ -18,9 +21,19 @@ public class CarScratch {
   }
   
   
-  public static List<Car> getCarsByCriterion(Iterable<Car> lc, CarCriterion criterion) {
-    List<Car> rv = new ArrayList<>();
-    for (Car c : lc) {
+//  public static List<Car> getCarsByCriterion(Iterable<Car> lc, CarCriterion criterion) {
+//    List<Car> rv = new ArrayList<>();
+//    for (Car c : lc) {
+//      if (criterion.test(c)) {
+//        rv.add(c);
+//      }
+//    }
+//    return rv;
+//  }
+
+  public static <E> List<E> filter(Iterable<E> lc, Criterion<E> criterion) {
+    List<E> rv = new ArrayList<>();
+    for (E c : lc) {
       if (criterion.test(c)) {
         rv.add(c);
       }
@@ -38,16 +51,16 @@ public class CarScratch {
     );
     showAll(cars);
     
-    showAll(getCarsByCriterion(cars, Car.getRedCarCriterion()));
+    showAll(filter(cars, Car.getRedCarCriterion()));
     
-    showAll(getCarsByCriterion(cars, Car.getGasLevelCarCriterion(7)));
+    showAll(filter(cars, Car.getGasLevelCarCriterion(7)));
     
     cars.sort(Car.getFuelComparator());
     showAll(cars);
     
-    showAll(getCarsByCriterion(cars, Car.getFourPassengerCriterion()));
+    showAll(filter(cars, Car.getFourPassengerCriterion()));
     
-    showAll(getCarsByCriterion(cars, c -> c.getPassengers().size() < 3));
+    showAll(filter(cars, c -> c.getPassengers().size() < 3));
    
   }
 }
