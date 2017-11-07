@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class SuperIterable<E> implements Iterable<E> {
@@ -24,6 +25,12 @@ public class SuperIterable<E> implements Iterable<E> {
     return new SuperIterable<>(rv);
   }
 
+  public void forEvery(Consumer<E> consumer) {
+    for (E e : self) {
+      consumer.accept(e);
+    }
+  }
+  
   @Override
   public Iterator<E> iterator() {
     return self.iterator();
@@ -33,16 +40,14 @@ public class SuperIterable<E> implements Iterable<E> {
     SuperIterable<String> strings = new SuperIterable<>(Arrays.asList(
         "LightCoral", "pink", "Orange", "Gold", "plum", "Blue", "limegreen"));
     
-    for (String s : strings) {
-      System.out.println("> " + s);
-    }
+    strings.forEvery(s -> System.out.println(s));
+    
     System.out.println("Long: ------------------------");
-    for (String s : strings.filter(s -> s.length() > 4)) {
-      System.out.println("> " + s);
-    }
+    strings
+        .filter(s -> s.length() > 4)
+        .forEvery(s -> System.out.println(s));
+    
     System.out.println("Original: ------------------------");
-    for (String s : strings) {
-      System.out.println("> " + s);
-    }
+    strings.forEvery(s -> System.out.println(s));
   }
 }
