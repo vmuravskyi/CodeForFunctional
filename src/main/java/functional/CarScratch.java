@@ -68,12 +68,12 @@ public class CarScratch {
     System.out.println("Fuel >= 7");
     showAll(filter(cars, sevenPlus));
     System.out.println("Not Fuel >= 7");
-    showAll(filter(cars, Criterion.negate(sevenPlus)));
+    showAll(filter(cars, sevenPlus.negate()));
     
     System.out.println("Four passengers or Black");
-    showAll(filter(cars, Criterion.or(Car.getFourPassengerCriterion(), Car.getColorCriterion("Black"))));
+    showAll(filter(cars, Car.getFourPassengerCriterion().or(Car.getColorCriterion("Black"))));
 
     System.out.println("Four passengers and Red");
-    showAll(filter(cars, Criterion.and(Car.getFourPassengerCriterion(), Car.getColorCriterion("Red"))));
+    showAll(filter(cars, Car.getFourPassengerCriterion().and(Car.getColorCriterion("Red"))));
   }
 }
