@@ -1,5 +1,6 @@
 package functional;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -69,5 +70,17 @@ public class CarScratch {
     
     showAll(filter(cars, c -> c.getPassengers().size() < 3));
    
+    List<String> words = Arrays.asList("LightCoral", "pink", "Orange", "Gold", "plum", "Blue", "limegreen");
+    System.out.println("Long color names:");
+    showAll(filter(words, w -> w.length() > 4));
+    System.out.println("Capitalized color names:");
+    showAll(filter(words, w -> Character.isUpperCase(w.charAt(0))));
+    
+    LocalDate today = LocalDate.now();
+    List<LocalDate> appointments = Arrays.asList(today, today.plusDays(2), today.minusDays(4), today.plusMonths(1));
+    System.out.println("All appointments");
+    showAll(appointments);
+    System.out.println("Future appointments after: " + today);
+    showAll(filter(appointments, a -> a.isAfter(today)));
   }
 }
