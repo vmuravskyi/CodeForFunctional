@@ -50,5 +50,7 @@ public class CarScratch {
     
     showAll(getCarsByCriterion(cars, c -> c.getPassengers().size() < 3));
     
+//    boolean b = (c -> c.getPassengers().size() < 3).test(Car.withGasColorPassengers(0, "Blue", "Joe"));
+    boolean b = ((CarCriterion)(c -> c.getPassengers().size() < 3)).test(Car.withGasColorPassengers(0, "Blue", "Joe"));
   }
 }
