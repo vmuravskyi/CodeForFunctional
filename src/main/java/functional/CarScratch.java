@@ -7,11 +7,6 @@ import java.util.List;
 @FunctionalInterface
 interface CarCriterion {
   boolean test(Car c);
-//  void doStuff();
-}
-
-interface OtherInterface {
-  boolean test(Car c);
 }
 
 public class CarScratch {
@@ -53,11 +48,6 @@ public class CarScratch {
     showAll(getCarsByCriterion(cars, Car.getFourPassengerCriterion()));
     
     showAll(getCarsByCriterion(cars, c -> c.getPassengers().size() < 3));
-    
-//    boolean b = (c -> c.getPassengers().size() < 3).test(Car.withGasColorPassengers(0, "Blue", "Joe"));
-    boolean b = ((CarCriterion)(c -> c.getPassengers().size() < 3)).test(Car.withGasColorPassengers(0, "Blue", "Joe"));
-
-//    CarCriterion cc = c -> c.getPassengers().size() < 3;
-    OtherInterface cc = c -> c.getPassengers().size() < 3;    
+   
   }
 }
