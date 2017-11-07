@@ -14,9 +14,9 @@ public class CarScratch {
     return x -> comp.compare(target, x);
   }
   
-  public static <E> Predicate<E> comparesGreater(ToIntFunction<E> comp) {
-    return x -> comp.applyAsInt(x) < 0;
-  }
+  public static <E> Predicate<E>  comparesGreater(ToIntFunction<E> comp) {
+    return x -> comp.applyAsInt(x)  < 0;
+  } //
   
   public static <E> void showAll(List<E> lc) {
     for (E c : lc) {
@@ -91,8 +91,6 @@ public class CarScratch {
     Car bert = Car.withGasColorPassengers(5, "Blue", "Bert");
     ToIntFunction<Car> compareFuelWithBert = compareWithThis(bert, Car.getFuelComparator());
 
-    for (Car c : cars) {
-      System.out.println("Comparing " + c + " with bert gives: " + compareFuelWithBert.applyAsInt(c));
-    }
+    showAll(filter(cars, comparesGreater(compareFuelWithBert)));
   }
 }
