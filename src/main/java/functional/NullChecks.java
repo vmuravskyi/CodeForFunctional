@@ -3,6 +3,7 @@ package functional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class NullChecks {
   public static void main(String[] args) {
@@ -21,5 +22,12 @@ public class NullChecks {
         System.out.println(owner + " has nothing in the car");
       }
     }
+
+    Optional<Map<String, Car>> ownersOpt = Optional.of(owners);
+    ownersOpt
+        .map(m -> m.get(owner))
+        .map(x -> x.getTrunkContents())
+        .map(x -> owner + " has " + x + " in the car")
+        .ifPresent(m -> System.out.println(m));
   }
 }
