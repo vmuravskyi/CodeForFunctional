@@ -60,7 +60,8 @@ public class Car {
   private static final Criterion<Car> RED_CAR_CRITERION
       = c -> c.color.equals("Red");
 
-  public static Criterion<Car> getGasLevelCarCriterion(int threshold) {
+  public static Criterion<Car> getGasLevelCarCriterion(final int threshold) {
+//    threshold += 1;
     return c -> c.gasLevel >= threshold;
   }
   
