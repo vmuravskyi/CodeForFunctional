@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class Car {
 
@@ -53,6 +55,11 @@ public class Car {
         + (trunkContents != null ? ", trunkContents=" + trunkContents : " no trunk") + '}';
   }
 
+  public static Criterion<Car> getColorCriterion(String ... colors) {
+    Set<String> colorSet = new TreeSet<>(Arrays.asList(colors));
+    return c -> colorSet.contains(c.getColor());
+  }
+  
   public static Criterion<Car> getRedCarCriterion() {
     return RED_CAR_CRITERION;
   }

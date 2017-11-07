@@ -62,5 +62,11 @@ public class CarScratch {
     showAll(appointments);
     System.out.println("Future appointments after: " + today);
     showAll(filter(appointments, a -> a.isAfter(today)));
+    
+    System.out.println("Red Cars:");
+    showAll(filter(cars, Car.getColorCriterion("Red")));
+
+    System.out.println("Red or Black Cars:");
+    showAll(filter(cars, Car.getColorCriterion("Red", "Black")));
   }
 }
