@@ -24,12 +24,6 @@ public class SuperIterable<E> implements Iterable<E> {
     }
     return new SuperIterable<>(rv);
   }
-
-  public void forEvery(Consumer<E> consumer) {
-    for (E e : self) {
-      consumer.accept(e);
-    }
-  }
   
   @Override
   public Iterator<E> iterator() {
@@ -40,14 +34,14 @@ public class SuperIterable<E> implements Iterable<E> {
     SuperIterable<String> strings = new SuperIterable<>(Arrays.asList(
         "LightCoral", "pink", "Orange", "Gold", "plum", "Blue", "limegreen"));
     
-    strings.forEvery(s -> System.out.println(s));
+    strings.forEach(s -> System.out.println(s));
     
     System.out.println("Long: ------------------------");
     strings
         .filter(s -> s.length() > 4)
-        .forEvery(s -> System.out.println(s));
+        .forEach(s -> System.out.println(s));
     
     System.out.println("Original: ------------------------");
-    strings.forEvery(s -> System.out.println(s));
+    strings.forEach(s -> System.out.println(s));
   }
 }
