@@ -74,5 +74,13 @@ public class SuperIterable<E> implements Iterable<E> {
         .filter(c -> c.getGasLevel() > 6)
         .map(c -> c.getPassengers().get(0) + " is driving a " + c.getColor() + " car with lots of fuel")
         .forEach(m -> System.out.println(m));
+
+    System.out.println("Add fuel to the tanks-------------------");
+    fleet
+        .map(c -> Car.withGasColorPassengers(
+            c.getGasLevel() + 5, 
+            c.getColor(), 
+            c.getPassengers().toArray(new String[]{})))
+        .forEach(c -> System.out.println(c));
   }
 }
