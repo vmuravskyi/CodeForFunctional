@@ -6,20 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 
 @FunctionalInterface
-//interface CarCriterion {
-//  boolean test(Car c);
-//}
 interface Criterion<E> {
   boolean test(E c);
 }
 
 public class CarScratch {
-//  public static void showAll(List<Car> lc) {
-//    for (Car c : lc) {
-//      System.out.println(c);
-//    }
-//    System.out.println("-------------------------------------");
-//  }
   
   public static <E> void showAll(List<E> lc) {
     for (E c : lc) {
@@ -28,17 +19,6 @@ public class CarScratch {
     System.out.println("-------------------------------------");
   }
   
-  
-//  public static List<Car> getCarsByCriterion(Iterable<Car> lc, CarCriterion criterion) {
-//    List<Car> rv = new ArrayList<>();
-//    for (Car c : lc) {
-//      if (criterion.test(c)) {
-//        rv.add(c);
-//      }
-//    }
-//    return rv;
-//  }
-
   public static <E> List<E> filter(Iterable<E> lc, Criterion<E> criterion) {
     List<E> rv = new ArrayList<>();
     for (E c : lc) {
