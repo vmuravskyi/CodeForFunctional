@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.function.Predicate;
 
 public class Car {
 
@@ -55,23 +56,23 @@ public class Car {
         + (trunkContents != null ? ", trunkContents=" + trunkContents : " no trunk") + '}';
   }
 
-  public static Criterion<Car> getColorCriterion(String ... colors) {
+  public static Predicate<Car> getColorCriterion(String ... colors) {
     Set<String> colorSet = new TreeSet<>(Arrays.asList(colors));
     return c -> colorSet.contains(c.getColor());
   }
   
-  public static Criterion<Car> getRedCarCriterion() {
+  public static Predicate<Car> getRedCarCriterion() {
     return RED_CAR_CRITERION;
   }
 
-  private static final Criterion<Car> RED_CAR_CRITERION
+  private static final Predicate<Car> RED_CAR_CRITERION
       = c -> c.color.equals("Red");
 
-  public static Criterion<Car> getGasLevelCarCriterion(final int threshold) {
+  public static Predicate<Car> getGasLevelCarCriterion(final int threshold) {
     return c -> c.gasLevel >= threshold;
   }
 
-  public static Criterion<Car> getFourPassengerCriterion() {
+  public static Predicate<Car> getFourPassengerCriterion() {
     return c -> c.passengers.size() >= 4;
   }
 
