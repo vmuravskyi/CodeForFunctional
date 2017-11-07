@@ -96,5 +96,13 @@ public class SuperIterable<E> implements Iterable<E> {
         .flatMap(c -> new SuperIterable<>(c.getPassengers()))
         .forEach(m -> System.out.println(m));
 
+    System.out.println("Passengers in cars with lots of fuel-------------------");
+    fleet
+        .filter(c -> c.getGasLevel() > 6)
+        .flatMap(c -> 
+            new SuperIterable<>(c.getPassengers())
+            .map(p -> p + " is in a " + c.getColor() + " car with lots of fuel"))
+        .forEach(m -> System.out.println(m));
+
   }
 }
