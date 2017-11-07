@@ -37,6 +37,10 @@ public class Car {
   public int getGasLevel() {
     return gasLevel;
   }
+  
+  public Car addGas(int g) {
+    return new Car(gasLevel + g, color, passengers, trunkContents);
+  }
 
   public String getColor() {
     return color;

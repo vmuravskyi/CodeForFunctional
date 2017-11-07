@@ -77,10 +77,7 @@ public class SuperIterable<E> implements Iterable<E> {
 
     System.out.println("Add fuel to the tanks-------------------");
     fleet
-        .map(c -> Car.withGasColorPassengers(
-            c.getGasLevel() + 5, 
-            c.getColor(), 
-            c.getPassengers().toArray(new String[]{})))
+        .map(c -> c.addGas(5))
         .forEach(c -> System.out.println(c));
   }
 }
