@@ -12,6 +12,10 @@ interface Criterion<E> {
 
 public class CarScratch {
   
+  public static <E> Criterion<E> negate(Criterion<E> crit) {
+    return x -> !crit.test(x);
+  }
+  
   public static <E> void showAll(List<E> lc) {
     for (E c : lc) {
       System.out.println(c);
@@ -68,5 +72,11 @@ public class CarScratch {
 
     System.out.println("Red or Black Cars:");
     showAll(filter(cars, Car.getColorCriterion("Red", "Black")));
+    
+    Criterion<Car> sevenPlus = Car.getGasLevelCarCriterion(7);
+    System.out.println("Fuel >= 7");
+    showAll(filter(cars, sevenPlus));
+    System.out.println("Not Fuel >= 7");
+    showAll(filter(cars, negate(sevenPlus)));
   }
 }
