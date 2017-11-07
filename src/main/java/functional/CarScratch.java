@@ -3,10 +3,20 @@ package functional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.function.ToIntFunction;
 
 public class CarScratch {
+  
+  public static <E> ToIntFunction<E> compareWithThis(E target, Comparator<E> comp) {
+    return x -> comp.compare(target, x);
+  }
+  
+  public static <E> Predicate<E> comparesGreater(ToIntFunction<E> comp) {
+    return x -> comp.applyAsInt(x) < 0;
+  }
   
   public static <E> void showAll(List<E> lc) {
     for (E c : lc) {
@@ -76,5 +86,13 @@ public class CarScratch {
 
     System.out.println("Four passengers and Red");
     showAll(filter(cars, Car.getFourPassengerCriterion().and(Car.getColorCriterion("Red"))));
+    
+    System.out.println("More fuel than Bert:");
+    Car bert = Car.withGasColorPassengers(5, "Blue", "Bert");
+    ToIntFunction<Car> compareFuelWithBert = compareWithThis(bert, Car.getFuelComparator());
+
+    for (Car c : cars) {
+      System.out.println("Comparing " + c + " with bert gives: " + compareFuelWithBert.applyAsInt(c));
+    }
   }
 }
