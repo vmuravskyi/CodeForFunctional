@@ -13,8 +13,15 @@ interface Criterion<E> {
 }
 
 public class CarScratch {
-  public static void showAll(List<Car> lc) {
-    for (Car c : lc) {
+//  public static void showAll(List<Car> lc) {
+//    for (Car c : lc) {
+//      System.out.println(c);
+//    }
+//    System.out.println("-------------------------------------");
+//  }
+  
+  public static <E> void showAll(List<E> lc) {
+    for (E c : lc) {
       System.out.println(c);
     }
     System.out.println("-------------------------------------");
