@@ -12,7 +12,7 @@ public class NullChecks {
     owners.put("Librarian", Car.withGasColorPassengers(3, "Octarine", "Rincewind", "Ridcully"));
     owners.put("Ogg", Car.withGasColorPassengersAndTrunk(9, "Black", "Weatherwax", "Magrat"));
 
-    String owner = "Ogg";
+    String owner = "Librarian";
     Car c = owners.get(owner);
     if (c != null) {
       List<String> trunkItems = c.getTrunkContents();
@@ -26,7 +26,9 @@ public class NullChecks {
     Optional<Map<String, Car>> ownersOpt = Optional.of(owners);
     ownersOpt
         .map(m -> m.get(owner))
-        .map(x -> x.getTrunkContents())
+        .map(x -> x.getTrunkContentsOpt()
+            .map(y -> y.toString())
+            .orElse("nothing"))
         .map(x -> owner + " has " + x + " in the car")
         .ifPresent(m -> System.out.println(m));
   }
