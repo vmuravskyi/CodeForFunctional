@@ -45,5 +45,10 @@ public class CarScratch {
     
     cars.sort(Car.getFuelComparator());
     showAll(cars);
+    
+    showAll(getCarsByCriterion(cars, Car.getFourPassengerCriterion()));
+    
+    showAll(getCarsByCriterion(cars, c -> c.getPassengers().size() < 3));
+    
   }
 }

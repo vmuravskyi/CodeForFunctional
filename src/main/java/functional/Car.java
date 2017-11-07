@@ -78,6 +78,10 @@ public class Car {
     }
   }
 
+  public static CarCriterion getFourPassengerCriterion() {
+    return c -> c.passengers.size() >= 4;
+  }
+  
   public static Comparator<Car> getFuelComparator() {
     return fuelComparator;
   }
