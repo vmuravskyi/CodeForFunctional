@@ -10,6 +10,10 @@ interface CarCriterion {
 //  void doStuff();
 }
 
+interface OtherInterface {
+  boolean test(Car c);
+}
+
 public class CarScratch {
   public static void showAll(List<Car> lc) {
     for (Car c : lc) {
@@ -52,5 +56,8 @@ public class CarScratch {
     
 //    boolean b = (c -> c.getPassengers().size() < 3).test(Car.withGasColorPassengers(0, "Blue", "Joe"));
     boolean b = ((CarCriterion)(c -> c.getPassengers().size() < 3)).test(Car.withGasColorPassengers(0, "Blue", "Joe"));
+
+//    CarCriterion cc = c -> c.getPassengers().size() < 3;
+    OtherInterface cc = c -> c.getPassengers().size() < 3;    
   }
 }
