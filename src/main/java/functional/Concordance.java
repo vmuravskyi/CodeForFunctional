@@ -19,11 +19,20 @@ public class Concordance {
   private static final Comparator<Map.Entry<String, Long>> valueOrder
       = Map.Entry.comparingByValue();
 
+  public static Stream<String> lines(Path p) {
+    try {
+      return Files.lines(p);
+    } catch (IOException ioe) {
+      throw new RuntimeException(ioe);
+    }
+  }
+  
   public static void main(String[] args) throws IOException {
-    List<String> filenames = Arrays.asList("PrideAndPrejudice.txt", "Bad.txt", "Emma.txt", "SenseAndSensibility.txt");
+    List<String> filenames = Arrays.asList("PrideAndPrejudice.txt", "Emma.txt", "SenseAndSensibility.txt");
     filenames.stream()
         .map(Paths::get)
-        .flatMap(Files::lines)
+//        .flatMap(Files::lines)
+        .flatMap(Concordance::lines)
         .map(String::toLowerCase)
         .flatMap(WORD_BREAK::splitAsStream)
         .filter(s -> s.length() > 0)
