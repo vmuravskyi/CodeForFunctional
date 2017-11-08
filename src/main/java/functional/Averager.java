@@ -1,6 +1,5 @@
 package functional;
 
-import java.util.Spliterator;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.DoubleStream;
 
