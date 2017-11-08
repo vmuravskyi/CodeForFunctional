@@ -23,7 +23,8 @@ public class Concordance {
     try {
       return Files.lines(p);
     } catch (IOException ioe) {
-      throw new RuntimeException(ioe);
+      System.err.println("Failed to open " + p);
+      return Stream.empty();
     }
   }
   
