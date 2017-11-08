@@ -27,18 +27,9 @@ public class Averager {
     long start = System.nanoTime();
     Average av = DoubleStream.generate(() -> ThreadLocalRandom.current().nextDouble(-Math.PI, Math.PI))
         .parallel()
-//        .unordered()
-//        .limit(4_000_000_000L)
         .limit(200_000_000)
-//        .map(x -> Math.sin(x))
         .map(Math::sin)
-        .collect(
-//            () -> new Average(), 
-            Average::new, 
-//            (r, d) -> r.include(d), 
-            Average::include, 
-//            (r1, r2) -> r1.merge(r2));
-            Average::merge);
+        .collect(Average::new, Average::include, Average::merge);
     long end = System.nanoTime();
     
     double mean = av.get();
