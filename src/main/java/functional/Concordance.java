@@ -28,7 +28,7 @@ public class Concordance {
   }
   
   public static void main(String[] args) throws IOException {
-    List<String> filenames = Arrays.asList("PrideAndPrejudice.txt", "Emma.txt", "SenseAndSensibility.txt");
+    List<String> filenames = Arrays.asList("PrideAndPrejudice.txt", "Bad.txt", "Emma.txt", "SenseAndSensibility.txt");
     filenames.stream()
         .map(Paths::get)
 //        .flatMap(Files::lines)
