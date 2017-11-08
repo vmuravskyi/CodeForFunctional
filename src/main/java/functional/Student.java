@@ -1,6 +1,7 @@
 package functional;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableMap;
@@ -63,10 +64,15 @@ public class Student {
         new Student("Hyrum", 72),
         new Student("Locke", 91),
         new Student("Bonzo", 57));
-    
+
 //    school.forEach(s -> System.out.println(s));
     Map<String, List<Student>> grades = school.stream()
         .collect(Collectors.groupingBy(s -> s.getLetterGrade()));
-    grades.forEach((k,v) -> System.out.println(k + " achieved by: " + v));
+//    grades.forEach((k,v) -> System.out.println(k + " achieved by: " + v));
+    Comparator<Map.Entry<String, List<Student>>> order = Map.Entry.comparingByKey();
+    order = order.reversed();
+    grades.entrySet().stream()
+        .sorted(order)
+        .forEach(e -> System.out.println(e.getKey() + " achieved by: " + e.getValue()));
   }
 }
