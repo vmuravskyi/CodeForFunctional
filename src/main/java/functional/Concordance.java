@@ -18,14 +18,18 @@ public class Concordance {
   public static void main(String[] args) throws IOException {
     try (Stream<String> lines = Files.lines(Paths.get("PrideAndPrejudice.txt"))) {
       lines
-          .map(s -> s.toLowerCase())
-          .flatMap(w -> WORD_BREAK.splitAsStream(w))
+//          .map(s -> s.toLowerCase())
+          .map(String::toLowerCase)
+//          .flatMap(w -> WORD_BREAK.splitAsStream(w))
+          .flatMap(WORD_BREAK::splitAsStream)
           .filter(s -> s.length() > 0)
           .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
           .entrySet().stream()
           .sorted(valueOrder.reversed())
           .limit(200)
-          .forEach(e -> System.out.printf("%20s : %5d\n", e.getKey(), e.getValue()));
+//          .forEach(e -> System.out.printf("%20s : %5d\n", e.getKey(), e.getValue()));
+          .map(e -> String.format("%20s : %5d", e.getKey(), e.getValue()))
+          .forEach(System.out::println);
     }
   }
 }
