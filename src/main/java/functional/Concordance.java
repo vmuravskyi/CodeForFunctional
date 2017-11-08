@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -19,12 +20,11 @@ public class Concordance {
   private static final Comparator<Map.Entry<String, Long>> valueOrder
       = Map.Entry.comparingByValue();
 
-  public static Stream<String> lines(Path p) {
+  public static Optional<Stream<String>> lines(Path p) {
     try {
-      return Files.lines(p);
+      return Optional.of(Files.lines(p));
     } catch (IOException ioe) {
-      System.err.println("Failed to open " + p);
-      return Stream.empty();
+      return Optional.empty();
     }
   }
   
@@ -33,7 +33,10 @@ public class Concordance {
     filenames.stream()
         .map(Paths::get)
 //        .flatMap(Files::lines)
-        .flatMap(Concordance::lines)
+        .map(Concordance::lines)
+        .peek(s -> {if (!s.isPresent()) System.err.println("Bad file");})
+        .filter(Optional::isPresent)
+        .flatMap(Optional::get)
         .map(String::toLowerCase)
         .flatMap(WORD_BREAK::splitAsStream)
         .filter(s -> s.length() > 0)
