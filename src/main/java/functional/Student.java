@@ -66,13 +66,13 @@ public class Student {
         new Student("Bonzo", 57));
 
 //    school.forEach(s -> System.out.println(s));
-    Map<String, List<Student>> grades = school.stream()
-        .collect(Collectors.groupingBy(s -> s.getLetterGrade()));
+    Map<String, Long> grades = school.stream()
+        .collect(Collectors.groupingBy(s -> s.getLetterGrade(), Collectors.counting()));
 //    grades.forEach((k,v) -> System.out.println(k + " achieved by: " + v));
-    Comparator<Map.Entry<String, List<Student>>> order = Map.Entry.comparingByKey();
+    Comparator<Map.Entry<String, Long>> order = Map.Entry.comparingByValue();
     order = order.reversed();
     grades.entrySet().stream()
         .sorted(order)
-        .forEach(e -> System.out.println(e.getKey() + " achieved by: " + e.getValue()));
+        .forEach(e -> System.out.println(e.getValue() + " students achieved grade " + e.getKey()));
   }
 }
