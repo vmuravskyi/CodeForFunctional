@@ -64,6 +64,9 @@ public class Student {
         new Student("Locke", 91),
         new Student("Bonzo", 57));
     
-    school.forEach(s -> System.out.println(s));
+//    school.forEach(s -> System.out.println(s));
+    Map<String, List<Student>> grades = school.stream()
+        .collect(Collectors.groupingBy(s -> s.getLetterGrade()));
+    grades.forEach((k,v) -> System.out.println(k + " achieved by: " + v));
   }
 }
