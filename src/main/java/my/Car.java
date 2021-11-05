@@ -1,9 +1,8 @@
 package my;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Car {
     private static final Criterion<Car> FOUR_PASSENGERS_CRITERION = c -> c.getPassengers().size() == 4;
@@ -50,8 +49,12 @@ public class Car {
     }
 
     // GasLevel
-    public static Criterion<Car> getGasLevelCarCriterion(int threshold) {
+    public static Criterion<Car> getGasLevelCarCriterion(final int threshold) {
         return c -> c.getGasLevel() >= threshold;
+    }
+
+    public int getGasLevel() {
+        return gasLevel;
     }
 
     // CountPassengers
@@ -59,9 +62,16 @@ public class Car {
         return countPassengersComparator;
     }
 
-    public int getGasLevel() {
-        return gasLevel;
+    public static Criterion<Car> getColorCriterion(String... colors) {
+        Set<String> colorSet = new HashSet<>(Arrays.asList(colors));
+        colorSet = colorSet.stream()
+                .map(String::toLowerCase)
+                .collect(Collectors.toSet());
+        Set<String> finalColorSet = colorSet;
+        return car -> finalColorSet.contains(car.getColor().toLowerCase());
     }
+
+
 
     public String getColor() {
         return color;

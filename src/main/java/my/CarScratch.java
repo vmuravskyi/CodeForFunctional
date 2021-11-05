@@ -53,15 +53,19 @@ public class CarScratch {
 
         showAll(cars);
 
-        List<String> colors = Arrays.asList("Red", "Blue", "Yellow", "Pink", "Green", "White");
-        showAll(getByCriterion(colors, st -> st.length() > 4));
-        showAll(getByCriterion(colors, st -> Character.isUpperCase(st.charAt(0))));
+        showAll(getByCriterion(cars, getColorCriterion("red", "green")));
 
-        LocalDate today = LocalDate.now();
-        List<LocalDate> dates = Arrays.asList(today, today.plusDays(1), today.plusWeeks(1),
-                today.minusDays(1)
-        );
-        showAll(getByCriterion(dates, localDate -> localDate.isAfter(today)));
+
+
+//        List<String> colors = Arrays.asList("Red", "Blue", "Yellow", "Pink", "Green", "White");
+//        showAll(getByCriterion(colors, st -> st.length() > 4));
+//        showAll(getByCriterion(colors, st -> Character.isUpperCase(st.charAt(0))));
+//
+//        LocalDate today = LocalDate.now();
+//        List<LocalDate> dates = Arrays.asList(today, today.plusDays(1), today.plusWeeks(1),
+//                today.minusDays(1)
+//        );
+//        showAll(getByCriterion(dates, localDate -> localDate.isAfter(today)));
 
     }
 }
