@@ -2,10 +2,8 @@ package my;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Car {
-    private static final Criterion<Car> FOUR_PASSENGERS_CRITERION = c -> c.getPassengers().size() == 4;
     private static final Criterion<Car> RED_CAR_CRITERION = c -> c.color.equals("Red");
     private static final Comparator<Car> gasComparator =
             (o1, o2) -> o1.getGasLevel() - o2.getGasLevel();
@@ -34,8 +32,8 @@ public class Car {
     }
 
     // FourPassengers
-    public static Criterion<Car> getFourPassengersCriterion() {
-        return FOUR_PASSENGERS_CRITERION;
+    public static Criterion<Car> getPassengersCriterion(int threshold) {
+        return car -> car.getPassengers().size() == threshold;
     }
 
     // RedCar
@@ -53,25 +51,23 @@ public class Car {
         return c -> c.getGasLevel() >= threshold;
     }
 
-    public int getGasLevel() {
-        return gasLevel;
-    }
-
     // CountPassengers
     public static Comparator<Car> getCountPassengersComparator() {
         return countPassengersComparator;
     }
 
+    // Color Criterion
     public static Criterion<Car> getColorCriterion(String... colors) {
         Set<String> colorSet = new HashSet<>(Arrays.asList(colors));
-        colorSet = colorSet.stream()
+        Set<String> finalColorSet = colorSet.stream()
                 .map(String::toLowerCase)
                 .collect(Collectors.toSet());
-        Set<String> finalColorSet = colorSet;
         return car -> finalColorSet.contains(car.getColor().toLowerCase());
     }
 
-
+    public int getGasLevel() {
+        return gasLevel;
+    }
 
     public String getColor() {
         return color;

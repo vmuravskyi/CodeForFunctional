@@ -1,30 +1,32 @@
 package my;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static my.Car.*;
+import static my.Car.getColorCriterion;
 
 
 public class CarScratch {
+
+    public static <E> Criterion<E> negate(Criterion<E> criterion) {
+        return e -> !criterion.test(e);
+    }
+
+    public static <E> Criterion<E> and(Criterion<E> first, Criterion<E> second) {
+        return e -> first.test(e) && second.test(e);
+    }
+
+    public static <E> Criterion<E> or(Criterion<E> first, Criterion<E> second) {
+        return e -> first.test(e) || second.test(e);
+    }
+
     public static <E> void showAll(List<E> lc) {
         for (E e : lc) {
             System.out.println(e);
         }
         System.out.println("-------------------------------------------------------------");
     }
-
-//    public static List<Car> getCarsByCriterion(Iterable<Car> in, CarCriterion carCriterion) {
-//        List<Car> output = new ArrayList<>();
-//        for (Car car : in) {
-//            if (carCriterion.test(car)) {
-//                output.add(car);
-//            }
-//        }
-//        return output;
-//    }
 
     public static <E> List<E> getByCriterion(Iterable<E> in, Criterion<E> criterion) {
         List<E> output = new ArrayList<>();
@@ -46,14 +48,20 @@ public class CarScratch {
                 Car.withGasColorPassengers(6, "Red", "Hy rum", "Locke", "Bonzo"),
                 Car.withGasColorPassengers(5, "Red", "Vova")
         );
-        showAll(cars);
 
-        showAll(getByCriterion(cars, getRedCarCriterion()));
-        showAll(getByCriterion(cars, getGasLevelCarCriterion(6)));
 
-        showAll(cars);
+//        showAll(getByCriterion(cars, getColorCriterion("OctaRIne", "GREEN")));
 
-        showAll(getByCriterion(cars, getColorCriterion("red", "green")));
+//        Criterion<Car> level7 = Car.getGasLevelCarCriterion(7);
+//        showAll(getByCriterion(cars, level7));
+//        Criterion<Car> notLevel7 = CarScratch.negate(level7);
+//        showAll(getByCriterion(cars, notLevel7));
+
+        Criterion<Car> isGreen = Car.getColorCriterion("Green");
+        Criterion<Car> fourPassengers = Car.getPassengersCriterion(4);
+
+        Criterion<Car> redFourPassengers = and(isGreen, fourPassengers);
+        showAll(getByCriterion(cars, redFourPassengers));
 
 
 
