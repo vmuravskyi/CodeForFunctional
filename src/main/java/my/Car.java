@@ -48,7 +48,7 @@ public class Car {
 
     // GasLevel
     public static Criterion<Car> getGasLevelCarCriterion(final int threshold) {
-        return c -> c.getGasLevel() >= threshold;
+        return c -> c.getGasLevel() == threshold;
     }
 
     // CountPassengers
