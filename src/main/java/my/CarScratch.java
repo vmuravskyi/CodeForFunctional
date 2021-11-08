@@ -2,12 +2,21 @@ package my;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
-
-import static my.Car.getColorCriterion;
+import java.util.function.Predicate;
+import java.util.function.ToIntFunction;
 
 
 public class CarScratch {
+
+    public static <E> ToIntFunction<E> compareWithThis(E target, Comparator<E> comp) {
+        return x -> comp.compare(target, x);
+    }
+
+    public static <E> Predicate<E> compareGreater(ToIntFunction<E> comp) {
+        return x -> comp.applyAsInt(x) < 0;
+    }
 
     public static <E> void showAll(List<E> lc) {
         for (E e : lc) {
@@ -16,7 +25,7 @@ public class CarScratch {
         System.out.println("-------------------------------------------------------------");
     }
 
-    public static <E> List<E> getByCriterion(Iterable<E> in, Criterion<E> criterion) {
+    public static <E> List<E> getByCriterion(Iterable<E> in, Predicate<E> criterion) {
         List<E> output = new ArrayList<>();
         for (E c : in) {
             if (criterion.test(c)) {
@@ -38,16 +47,26 @@ public class CarScratch {
         );
 
 
-        Criterion<Car> isGreen = Car.getColorCriterion("Green");
-        Criterion<Car> isFourPassengers = Car.getPassengersCriterion(4);
-        Criterion<Car> isSixLiters = Car.getGasLevelCarCriterion(6);
-        Criterion<Car> isColorBlack = Car.getColorCriterion("Black");
+        Predicate<Car> isGreen = Car.getColorCriterion("Green");
+        Predicate<Car> isFourPassengers = Car.getPassengersCriterion(4);
+        Predicate<Car> isSixLiters = Car.getGasLevelCarCriterion(6);
+        Predicate<Car> isColorBlack = Car.getColorCriterion("Black");
 
-        Criterion<Car> greenFourPassengers = isGreen.and(isFourPassengers);
+        Predicate<Car> greenFourPassengers = isGreen.and(isFourPassengers);
         showAll(getByCriterion(cars, greenFourPassengers));
 
-        Criterion<Car> sixLitersOrBlack = isColorBlack.or(isSixLiters);
+        Predicate<Car> sixLitersOrBlack = isColorBlack.or(isSixLiters);
         showAll(getByCriterion(cars, sixLitersOrBlack));
+
+        Car bert = Car.withGasColorPassengers(5, "Blue");
+
+        ToIntFunction<Car> compareWithBert = compareWithThis(bert, Car.getGasComparator());
+        for (Car c : cars) {
+            System.out.println("comparing " + c + " with bert gives " +
+                    compareWithBert.applyAsInt(c));
+        }
+
+        showAll(getByCriterion(cars, compareGreater(compareWithBert)));
 
     }
 }

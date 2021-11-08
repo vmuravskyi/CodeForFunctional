@@ -2,9 +2,10 @@ package my;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.function.Predicate;
 
 public class Car {
-    private static final Criterion<Car> RED_CAR_CRITERION = c -> c.color.equals("Red");
+    private static final Predicate<Car> RED_CAR_CRITERION = c -> c.color.equals("Red");
     private static final Comparator<Car> gasComparator =
             (o1, o2) -> o1.getGasLevel() - o2.getGasLevel();
     private static final Comparator<Car> countPassengersComparator =
@@ -32,12 +33,12 @@ public class Car {
     }
 
     // FourPassengers
-    public static Criterion<Car> getPassengersCriterion(int threshold) {
+    public static Predicate<Car> getPassengersCriterion(int threshold) {
         return car -> car.getPassengers().size() == threshold;
     }
 
     // RedCar
-    public static Criterion<Car> getRedCarCriterion() {
+    public static Predicate<Car> getRedCarCriterion() {
         return RED_CAR_CRITERION;
     }
 
@@ -47,7 +48,7 @@ public class Car {
     }
 
     // GasLevel
-    public static Criterion<Car> getGasLevelCarCriterion(final int threshold) {
+    public static Predicate<Car> getGasLevelCarCriterion(final int threshold) {
         return c -> c.getGasLevel() == threshold;
     }
 
@@ -57,7 +58,7 @@ public class Car {
     }
 
     // Color Criterion
-    public static Criterion<Car> getColorCriterion(String... colors) {
+    public static Predicate<Car> getColorCriterion(String... colors) {
         Set<String> colorSet = new HashSet<>(Arrays.asList(colors));
         Set<String> finalColorSet = colorSet.stream()
                 .map(String::toLowerCase)
