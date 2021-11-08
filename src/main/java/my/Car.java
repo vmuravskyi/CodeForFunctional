@@ -70,6 +70,10 @@ public class Car {
         return gasLevel;
     }
 
+    public Car addGas(int gasLevelToAdd) {
+        return new Car(this.gasLevel + 3, this.color, this.passengers, this.trunkContents);
+    }
+
     public String getColor() {
         return color;
     }
