@@ -32,12 +32,12 @@ public class CollectAverage {
 
         Averager result = DoubleStream.generate(() -> ThreadLocalRandom.current().nextDouble(-Math.PI, Math.PI))
                 .parallel()
-                .unordered()
+//                .unordered()
                 .limit(200_000_000L)
-                .map(operand -> Math.sin(operand))
-                .collect(() -> new Averager(),
-                        (averager, value) -> averager.include(value),
-                        (averager, averager2) -> averager.merge(averager2));
+                .map(Math::sin)
+                .collect(Averager::new,
+                        Averager::include,
+                        Averager::merge);
 
         long end = System.nanoTime();
         System.out.println("Average is " + result.getTotal() + " computation took " + ((end - start) / 1_000_000) + " ms");

@@ -29,9 +29,10 @@ public class Concordance {
                     .entrySet().stream()
                     .sorted(compareByValueReversed)
                     .limit(200)
-                    .forEach(System.out::println);
+                    .forEach(l -> System.out.printf("%10s : %5d\n", l.getKey(), l.getValue()));
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 }
