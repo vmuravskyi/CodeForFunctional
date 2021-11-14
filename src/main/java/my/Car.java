@@ -86,6 +86,10 @@ public class Car {
         return trunkContents;
     }
 
+    public Optional<List<String>> getTrunkContentsOpt() {
+        return Optional.ofNullable(trunkContents);
+    }
+
     @Override
     public String toString() {
         return "Car{" +

@@ -105,5 +105,26 @@ public class SuperIterable<E> implements Iterable<E> {
                 .flatMap(car -> new SuperIterable<>(car.getPassengers()))
                 .map(String::toUpperCase)
                 .forEach(System.out::println);
+
+        System.out.println("----------------------------------------");
+        carIter
+                .flatMap(car -> new SuperIterable<>(car.getPassengers())
+                        .map(p -> p + " is riding in " + car.getColor() + " car"))
+                .forEach(System.out::println);
+
+
+    System.out.println("----------------------------------------");
+    Map<String, Car> owners = new HashMap<>();
+    owners.put("Fred", Car.withGasColorPassengers(6, "Red", "Fred", "Jim", "Sheila"));
+    owners.put("Rincewind", Car.withGasColorPassengers(3, "Octarine", "Rincewind", "Ridcully"));
+    owners.put("Magrat", Car.withGasColorPassengers(9, "Black", "Weatherwax", "Magrat"));
+    owners.put("Valentine", Car.withGasColorPassengersAndTrunk(7, "Green", "Valentine", "Gillian", "Anne", "Dr.Mahmoud"));
+
+    Optional<Map<String, Car>> ownersOpt = Optional.of(owners);
+    ownersOpt
+            .map(m -> m.get("owner"))
+            .map(x -> x.getTrunkContentsOpt())
+            .map(x -> owners + " has " + x + " in the car")
+            .ifPresent(s -> System.out.println(s));
     }
 }
